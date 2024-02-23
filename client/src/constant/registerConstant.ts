@@ -1,0 +1,73 @@
+export const statusConstant = [
+    {
+        optionName:"Single",
+        optionValue: "single",
+    },
+    {
+        optionName:"Married",
+        optionValue: "married",
+    },
+    {
+        optionName:"private",
+        optionValue: "Prefer not to tell",
+    },
+]
+
+export const departmentConstant = [
+    {
+        deparmentName:"PS",
+        departmentValue:"PS"
+    },
+    {
+        deparmentName:"CLE",
+        departmentValue:"CLE"
+    },
+    {
+        deparmentName:"CAE",
+        departmentValue:"CAE"
+    },
+    {
+        deparmentName:"CAFAE",
+        departmentValue:"CAFAE"
+    },
+    {
+        deparmentName:"CASE",
+        departmentValue:"CASE"
+    },
+    {
+        deparmentName:"CBAE",
+        departmentValue:"CBAE"
+    },
+    {
+        deparmentName:"CCE",
+        departmentValue:"CCE"
+    },
+    {
+        deparmentName:"CCJE",
+        departmentValue:"CCJE"
+    },
+    {
+        deparmentName:"CEE",
+        departmentValue:"CEE"
+    },
+    {
+        deparmentName:"CHE",
+        departmentValue:"CHE"
+    },
+    {
+        deparmentName:"CHSE",
+        departmentValue:"CHSE"
+    },
+    {
+        deparmentName:"CTE",
+        departmentValue:"CTE"
+    },
+    {
+        deparmentName:"TS",
+        departmentValue:"TS"
+    },
+    {
+        deparmentName:"BED",
+        departmentValue:"BED"
+    },
+]
