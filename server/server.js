@@ -7,12 +7,14 @@ const server = http.createServer(app);
 const {check, sequelize} = require("./src/common/DB/connection");
 const student = require("./src/user/student/Student");
 const createStudent = require("./src/user/user_register/route");
+const bodyParser = require("body-parser");
 const io = socketIo(server,{ 
     cors: {
       origin: `http://localhost:5173`
     }
 })
 
+app.use(bodyParser.json());
 app.use(createStudent);
 
 io.on("connection", (socket) => {

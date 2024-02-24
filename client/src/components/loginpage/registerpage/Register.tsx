@@ -1,5 +1,4 @@
 import RegisterInput from "./RegisterInput"
-import UserProfile from "./UserProfile"
 
 const Register = () => {
   return (
@@ -20,12 +19,6 @@ const Register = () => {
       py-5
       "
       >
-        <div
-        className="flex-[2_1_0%] flex flex-col justify-center items-center border-[lightgray] border-r-[1px] "
-        >
-          <h1 className='self-start text-xl font-medium mb-10 pl-5'>Register you account</h1>
-          <UserProfile/>
-        </div>
 
         <div
         className="flex-1 p-3"

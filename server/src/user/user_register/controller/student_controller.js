@@ -11,7 +11,6 @@ module.exports = {
             program,
             about_me,
         } = req.body;
-
         const student_properties = {
             username:username,
             password:password,
@@ -23,10 +22,20 @@ module.exports = {
             program:program,
             about_me:about_me
         }
+        if(!username || !password || !email){
+            return res.status(400).json({
+                status:false,
+                data: "Fill all fields"
+            });
+        }else{
+            return res.status(200).json({
+                status:true,
+                data:student_properties
+            });
+        }
 
-        return res.status(200).json({
-            status:true,
-            data:" Account has been created."
-        });
+        
+
+        
     },
 }
