@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+
 const Login = () => {
+  const baseUrl = "http://localhost:8080/students-login";
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
@@ -14,9 +17,19 @@ const Login = () => {
       password: Yup.string()
                 .required("Required")
     }),
+    
     onSubmit: values =>{
+
+      const loginData = JSON.stringify(values);
+      axios.post(baseUrl,loginData)
+            .then(response =>{
+              console.log("This is the response on login: ",response);
+            }).catch(error =>{
+              console.log("There is an error to your request. ", error);
+            })
       console.log("This is the value of form: ",JSON.stringify(values));
     }
+
   })
 
   return (

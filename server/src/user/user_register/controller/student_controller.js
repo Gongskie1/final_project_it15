@@ -24,7 +24,7 @@ module.exports = {
             let findStudent;
             let create_studAccount;
             try {
-                findStudent = await Student.findOne({ email: email });
+                findStudent = await Student.findOne({ where:{email} });
 
                 if (!findStudent) {
                     create_studAccount = await Student.create(student_properties)
