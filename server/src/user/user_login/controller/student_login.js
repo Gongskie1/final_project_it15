@@ -2,7 +2,7 @@ const Student = require("../../student/Student");
 
 module.exports = {
     login_students: async(req,res) =>{
-        const { username, password} = req.body;
+        const { username, password } = req.body;
 
         let validate;
         try{
@@ -11,16 +11,19 @@ module.exports = {
             if(validate){
                 return res.status(202).json({
                     status:true,
-                    data: validate
+                    message: "Welcome, and chat with your crush."
                 })
             }else{
-                return res.status(403).json({
+                return res.status(401).json({
                     status:false,
-                    data: "Invalid username or password."
+                    message: "Invalid username or password."
                 })
             }
         }catch(err){
-            return `${err} Something wrong with your model`
+            return res.status(400).json({
+                success: false,
+                message: "Something went wrong with your request.",
+              });
         }
     }
 }

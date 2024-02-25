@@ -9,12 +9,10 @@ const student = require("./src/user/student/Student");
 const createStudent = require("./src/user/user_register/route");
 const bodyParser = require("body-parser");
 const studentLogin = require("./src/user/user_login/route");
-const io = socketIo(server,{ 
-    cors: {
-      origin: `http://localhost:5173`
-    }
-})
+const cors = require("cors")
+app.use(cors({ origin: "http://localhost:5173" }));
 
+const io = socketIo(server)
 app.use(bodyParser.json());
 app.use(createStudent);
 app.use(studentLogin)

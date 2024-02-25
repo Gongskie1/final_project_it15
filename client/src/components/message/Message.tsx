@@ -4,7 +4,7 @@
 const Message = () => {
   return (
     <div>
-      asd
+      This is the messaging app
     </div>
   )
 }

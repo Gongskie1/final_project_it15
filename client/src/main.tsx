@@ -19,6 +19,10 @@ const router = createBrowserRouter([
   {
     path:"/register",
     element: <Register/>
+  },
+  {
+    path:"/chat-page",
+    element: <Message/>
   }
 ]);
 

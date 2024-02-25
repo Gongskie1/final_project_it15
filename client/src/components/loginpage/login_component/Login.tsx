@@ -2,10 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useState } from "react";
+import { ErrorInput } from "../../common/";
+
+interface response {
+  status: string;
+  message: string;
+}
 
 const Login = () => {
   const baseUrl = "http://localhost:8080/students-login";
   const navigate = useNavigate();
+  const [responseData,setResponseData] = useState<response>();
+  const [status,setStatus] = useState<boolean>(false);
+
   const formik = useFormik({
     initialValues:{
       username:"",
@@ -17,32 +27,41 @@ const Login = () => {
       password: Yup.string()
                 .required("Required")
     }),
-    
-    onSubmit: values =>{
 
-      const loginData = JSON.stringify(values);
-      axios.post(baseUrl,loginData)
-            .then(response =>{
-              console.log("This is the response on login: ",response);
-            }).catch(error =>{
-              console.log("There is an error to your request. ", error);
-            })
-      console.log("This is the value of form: ",JSON.stringify(values));
+    onSubmit: async (values) => {
+      
+        await axios.post(baseUrl, JSON.stringify(values),{ headers: {"Content-Type": "application/json"} })
+              .then(response =>{
+                setResponseData(response.data)
+                setStatus(false)
+                // window.alert(response.data.status)
+                navigate("/chat-page");
+                // console.log(responseData)
+              }).catch(error =>{
+                setResponseData(error.response.data)
+                setStatus(true)
+                console.log("There is an error on your request", responseData);
+              });
     }
 
   })
+
+  
+
 
   return (
     <div
     className="
     text-[#1e693a]
     rounded-md
-    p-[100px_20px]
+    p-[100px_20px] 
     w-3/4
     h-full
-    flex flex-col justify-between
+    flex flex-col justify-between items-center
+    relative
     "
     > 
+      <ErrorInput status={status} />
       <h1
         className="text-3xl font-bold"
         >Login to your account</h1>
@@ -51,6 +70,7 @@ const Login = () => {
       flex
       flex-col
       gap-5
+      w-full
       "
       >
         
