@@ -34,9 +34,13 @@ const Login = () => {
               .then(response =>{
                 setResponseData(response.data)
                 setStatus(false)
-                // window.alert(response.data.status)
-                navigate("/chat-page");
-                // console.log(responseData)
+                
+                if(response.data.status){
+                  navigate("/chat-page");
+                }else{
+                  return null;
+                }
+                
               }).catch(error =>{
                 setResponseData(error.response.data)
                 setStatus(true)
