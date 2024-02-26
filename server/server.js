@@ -25,7 +25,6 @@ const io = new Server(server,{
 // ================================================
 io.on("connection", (socket) => {
 
-  socket.emit("hello", "hello client");
   console.log(socket.id)
   socket.on("fromClient", (message) => {
     console.log(message);

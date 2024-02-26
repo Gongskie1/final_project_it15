@@ -18,7 +18,7 @@ const Student = sequelize.define("student",
         },
         profile_pic:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         email:{
             type: DataTypes.STRING,

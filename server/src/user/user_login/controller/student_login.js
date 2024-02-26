@@ -25,5 +25,22 @@ module.exports = {
                 message: "Something went wrong with your request.",
               });
         }
+    },
+
+    all_student: async(req,res) =>{
+        let getAll
+        try{
+            getAll = await Student.findAll();
+            
+            return res.status(200).json({
+                status:true,
+                message: getAll
+            })
+        }catch(err){
+            return res.status(401).json({
+                status:false,
+                message: `Something wrong: ${err}`
+            })
+        }
     }
 }
