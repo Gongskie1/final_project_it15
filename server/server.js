@@ -1,29 +1,38 @@
 require('dotenv').config();
 const express = require("express")
-const socketIo = require("socket.io")
+const {Server} = require("socket.io")
 const http = require("http")
 const app = express()
-const server = http.createServer(app);
 const {check, sequelize} = require("./src/common/DB/connection");
 const student = require("./src/user/student/Student");
 const createStudent = require("./src/user/user_register/route");
 const bodyParser = require("body-parser");
 const studentLogin = require("./src/user/user_login/route");
-const cors = require("cors")
+const cors = require("cors");
+
+// ================================================
 app.use(cors({ origin: "http://localhost:5173" }));
 
-const io = socketIo(server)
 app.use(bodyParser.json());
 app.use(createStudent);
 app.use(studentLogin)
-
+const server = http.createServer(app);
+const io = new Server(server,{
+  cors:{
+    origin:"http://localhost:5173"
+  }
+});
+// ================================================
 io.on("connection", (socket) => {
-  console.log("a user connected");
 
   socket.emit("hello", "hello client");
-
-  socket.on("server", (message) => {
+  console.log(socket.id)
+  socket.on("fromClient", (message) => {
     console.log(message);
+  });
+
+  socket.on("disconnect", ()=>{
+    console.log("user disconnected", socket.id)
   });
 });
 

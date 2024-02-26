@@ -43,7 +43,7 @@ const Login = () => {
                 
               }).catch(error =>{
                 setResponseData(error.response.data)
-                setStatus(true)
+                setStatus(true);
                 console.log("There is an error on your request", responseData);
               });
     }

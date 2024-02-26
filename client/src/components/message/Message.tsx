@@ -1,8 +1,16 @@
+import { useEffect } from "react"
 import { MainChat, Message_nav, SideBar } from ".."
 
 
 
+
 const Message = () => {
+  
+  useEffect(()=>{
+    fetch("")
+  },[]);
+
+
   return (
     <div className="text-[#6A9C7D] h-screen relative flex flex-col">
       <nav className="shadow-md flex justify-center items-center"><Message_nav/></nav>
