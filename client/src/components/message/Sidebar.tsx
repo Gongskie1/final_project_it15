@@ -14,6 +14,7 @@ interface studentListType{
 
 const Sidebar = () => {
     const [studentList ,setStudentList] = useState<studentListType[]>([]);
+    const [values,setValues] = useState<string>();
 
     useEffect(()=>{
         fetch("http://localhost:8080/student-list")
@@ -26,13 +27,20 @@ const Sidebar = () => {
         .then(data => {
             setStudentList(data.message)
             console.log("List of students:", data.message);
-            console.log(studentList)
         })
         .catch(err => {
             console.error('Error fetching student list:', err);
         });
+        
     },[])
-
+    
+   
+    useEffect(() => {
+        if (values) {
+            window.alert(values);
+        }
+    }, [values]);
+    
   return (
     <div className='px-4  h-full flex flex-col'>
 
@@ -46,7 +54,8 @@ const Sidebar = () => {
 
             <div className='pt-4 flex overflow-auto bg-[#F1F5F9] h-full flex-col rounded-lg gap-2'>
                 {studentList.map((value,index)=>(
-                    <div className='flex flex-row justify-center items-center self-baseline gap-2 cursor-pointer overflow-x-auto' key={index}>
+                    <div className='flex flex-row justify-center items-center self-baseline gap-2 cursor-pointer overflow-x-auto' key={index} 
+                        onClick={()=> {setValues(value.email);}}>
                         <div
                         className='w-10 h-10 bg-[#E5E5E5] rounded-lg flex justify-center items-center cursor-pointer'
                         >s</div>
@@ -62,6 +71,7 @@ const Sidebar = () => {
 
     </div>
   )
+ 
 }
 
 export default Sidebar

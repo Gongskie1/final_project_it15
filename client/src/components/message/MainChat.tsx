@@ -1,21 +1,22 @@
 import MainChatNav from './MainChatNav'
 import { BsFillSendArrowUpFill } from "react-icons/bs";
-import { useFormik }from "formik";
+import { useFormik } from "formik";
 import { useEffect, useRef, useState } from 'react';
 import {io} from "socket.io-client";
 // import * as Yup from "yup"
 
-interface inputType{
-    inputMessage:string,
-    inputFile: FileList | undefined;
-}
+// interface inputType{
+//     inputMessage:string,
+//     inputFile: FileList | undefined;
+// }
 const socket = io("http://localhost:8080");
 
 const MainChat = () => {
-    const [message, setMessage] = useState<inputType>();
+    // const [message, setMessage] = useState<inputType>();
+    const [values,setValues] = useState<string>();
     
     
-    const formik = useFormik<inputType>({
+    const formik = useFormik({
         initialValues:{
             inputMessage:"",
             inputFile: undefined
@@ -26,15 +27,19 @@ const MainChat = () => {
             formik.setFieldValue("inputMessage", "");
             handleClearFile()
 
-            setMessage(values)
-            
+            socket.emit("fromClient", values);
         }
     })
 
     useEffect(()=>{
-        socket.emit("fromClient", message);
-        // socket.connect
-    },[message])
+        socket.on("receive_message", (data)=>{
+            // setMessage(data.inputMessage)
+            setValues(data.inputMessage)
+            // console.log(message)
+        })
+    },[socket])
+
+    
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         formik.setFieldValue('inputFile', e.target.files?.[0]);
@@ -65,7 +70,8 @@ const MainChat = () => {
             >
 
                 <div className=' h-full border-b-2'>
-                    {message?.inputMessage }
+                    {/* {message?.inputMessage} */}
+                    {values}
                 </div>
                 {/* ------------------------------------- */}
                 <div className='py-3 flex flex-row items-center px-3 gap-2 bg-slate-200'>

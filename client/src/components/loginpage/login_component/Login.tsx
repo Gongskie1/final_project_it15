@@ -4,10 +4,11 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
 import { ErrorInput } from "../../common/";
-
 interface response {
+
   status: string;
   message: string;
+    
 }
 
 const Login = () => {
