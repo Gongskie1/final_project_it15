@@ -3,7 +3,7 @@ import { BsFillSendArrowUpFill } from "react-icons/bs";
 import { useFormik } from "formik";
 import { useEffect, useRef, useState } from 'react';
 import {io} from "socket.io-client";
-import { userLoader } from './hooks/useLoader';
+import { userLoader } from './hooks/Datas';
 // import {Random} from "./mess-utils";
 // import * as Yup from "yup"
 
@@ -15,12 +15,12 @@ const socket = io("http://localhost:8080");
 
 const MainChat = () => {
     // const [message, setMessage] = useState<inputType>();
-    const [values,setValues] = useState<string | undefined>(undefined);
+    const [values,setValues] = useState<string >();
     useEffect(() => {
         const fetchData = async () => {
             const data = await userLoader();
             if (data) {
-                setValues(data.name); // Assuming 'name' is a property in your fetched data
+                setValues(data.username); 
             }
         };
 
@@ -71,7 +71,7 @@ const MainChat = () => {
         action="">
 
             <div className='w-full shadow-xl'>
-                <MainChatNav name={`${values}`}/>
+                <MainChatNav/>
             </div>
 
             <div

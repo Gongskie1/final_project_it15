@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 
 interface studentListType{
+    id: number;
     about_me: string;
     age: string;
     department: string;
@@ -36,11 +37,6 @@ const Sidebar = () => {
     },[])
     
    
-    // useEffect(() => {
-    //     if (values) {
-    //         window.alert(values);
-    //     }
-    // }, [values]);
     
   return (
     <div className='px-4  h-full flex flex-col'>
@@ -57,7 +53,7 @@ const Sidebar = () => {
                 {studentList.map((value,index)=>(
                     <Link className='flex flex-row justify-center items-center self-baseline gap-2 cursor-pointer overflow-x-auto' key={index}
                     // onClick={() => { setValues(value.email); } } 
-                    to={`friend/${index}`}>
+                    to={`friend/${value.id}`}>
                         <div
                         className='w-10 h-10 bg-[#E5E5E5] rounded-lg flex justify-center items-center cursor-pointer'
                         >s</div>

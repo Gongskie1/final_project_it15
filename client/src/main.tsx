@@ -10,7 +10,7 @@ import {
   MainChat,
   Message } from './components';
 import Register from './components/loginpage/registerpage/Register';
-import { userLoader as loader } from './components/message/hooks/useLoader';
+import { userLoader as loader } from './components/message/hooks/Datas';
 
 
 const router = createBrowserRouter([

@@ -1,10 +1,14 @@
-import React from 'react'
+import { Axios } from 'axios';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-interface MainNavTypes{
-  name:string;
-}
+// interface MainNavTypes{
+//   friendId:string;
+// }
 
-const MainChatNav = ({name}:MainNavTypes) => {
+const MainChatNav = () => {
+  const params = useParams();
+  
   return (
     <div
     className='shadow-xl px-5 py-2 border-t-[1px] border-x-[1px] rounded-t-lg'
@@ -15,12 +19,12 @@ const MainChatNav = ({name}:MainNavTypes) => {
             <div
             className='w-12 h-12 bg-[#E5E5E5] cursor-pointer flex justify-center items-center rounded-lg'
             >
-                img
+                
             </div>
             <div>
                 <h2
                 className='text-base font-semibold uppercase'
-                >{name}</h2>
+                >asdasd</h2>
             </div>
         </div>
     </div>
