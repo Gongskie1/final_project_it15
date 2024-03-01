@@ -3,18 +3,13 @@ import { BsFillSendArrowUpFill } from "react-icons/bs";
 import { useFormik } from "formik";
 import { useEffect, useRef, useState } from 'react';
 import {io} from "socket.io-client";
-// import { useParams } from 'react-router-dom';
 
 const socket = io("http://localhost:8080");
-// interface studentDataTypes {
-//     username:string;
-//     password:string;
-//     email:string;
-// }
+
 const MainChat = () => {
-    // const [message, setMessage] = useState<inputType>();
+    const storedValue = localStorage.getItem("student");
+    const username = storedValue ? JSON.parse(storedValue) : null;
     const [values,setValues] = useState<string >();
-    // const [studentData,setStudentData] = useState<studentDataTypes>()
     
     
     const formik = useFormik({
@@ -27,8 +22,6 @@ const MainChat = () => {
 
             formik.setFieldValue("inputMessage", "");
             handleClearFile()
-
-            socket.emit("fromClient", values);
         }
     })
 
@@ -50,7 +43,6 @@ const MainChat = () => {
         formik.setFieldValue("inputFile", null||"" );
     };
 
-    // const params = useParams();
 
 
    

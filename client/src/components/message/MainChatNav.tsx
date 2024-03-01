@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const MainChatNav = () => {
   const [data,setData] = useState<string>()
-      const params = useParams();
+    const params = useParams();
 
   useEffect(() => {
     const id = params.id;
@@ -19,14 +19,14 @@ const MainChatNav = () => {
         return response.json();
     })
         .then((data) => {
-            setData(data.data.email)
-            console.log("Server Response Status:", data);
+            setData(data.data.username)
+            // console.log("Server Response Status:", data);
         })
         .catch((error) => {
             console.log("Error fetching data:", error);
         });
 
-        console.log("This is an ID: ", id);
+        // console.log("This is an ID: ", id);
     }, [params]);
   
   return (

@@ -1,5 +1,5 @@
 const Student = require("../../student/Student");
-
+const { Op } = require('sequelize');
 module.exports = {
     login_students: async(req,res) =>{
         const { username, password } = req.body;
@@ -11,7 +11,7 @@ module.exports = {
             if(validate){
                 return res.status(202).json({
                     status:true,
-                    message: "Welcome, and chat with your crush."
+                    message: validate
                 })
             }else{
                 return res.status(401).json({
@@ -28,9 +28,17 @@ module.exports = {
     },
 
     all_student: async(req,res) =>{
+        const { studentID }= req.params
+
         let getAll
         try{
-            getAll = await Student.findAll();
+            getAll = await Student.findAll({
+                where: {
+                    id: {
+                        [Op.not]: studentID
+                    }
+                }
+            });
             
             return res.status(200).json({
                 status:true,
@@ -42,5 +50,6 @@ module.exports = {
                 message: `Something wrong: ${err}`
             })
         }
-    }
+    },
+    
 }

@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { Message_nav, SideBar } from ".."
 import { Outlet } from "react-router-dom";
 
@@ -6,10 +5,7 @@ import { Outlet } from "react-router-dom";
 
 
 const Message = () => {
-  
-  useEffect(()=>{
-    fetch("")
-  },[]);
+
 
 
   return (

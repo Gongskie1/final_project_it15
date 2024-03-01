@@ -37,6 +37,7 @@ const Login = () => {
                 setStatus(false)
                 
                 if(response.data.status){
+                  localStorage.setItem("student", JSON.stringify(response.data.message));
                   navigate("/chat-page");
                 }else{
                   return null;
@@ -49,7 +50,7 @@ const Login = () => {
               });
     }
 
-  })
+  });
 
   
 
