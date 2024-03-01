@@ -16,7 +16,7 @@ interface studentListType{
 
 const Sidebar = () => {
     const [studentList ,setStudentList] = useState<studentListType[]>([]);
-    // const [values,setValues] = useState<string>();
+    
 
     useEffect(()=>{
         fetch("http://localhost:8080/student-list")
@@ -52,7 +52,7 @@ const Sidebar = () => {
             <div className='pt-4 flex overflow-auto bg-[#F1F5F9] h-full flex-col rounded-lg gap-2'>
                 {studentList.map((value,index)=>(
                     <Link className='flex flex-row justify-center items-center self-baseline gap-2 cursor-pointer overflow-x-auto' key={index}
-                    // onClick={() => { setValues(value.email); } } 
+                    // onClick={() =>  message} 
                     to={`friend/${value.id}`}>
                         <div
                         className='w-10 h-10 bg-[#E5E5E5] rounded-lg flex justify-center items-center cursor-pointer'

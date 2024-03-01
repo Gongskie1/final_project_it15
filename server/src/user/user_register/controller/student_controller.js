@@ -34,7 +34,7 @@ module.exports = {
                         data: "A student has been created."
                     });
                 } else {
-                    return res.status(200).json({
+                    return res.status(403).json({
                         status: true,
                         data: "Student email is used"
                     });

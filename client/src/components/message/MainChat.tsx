@@ -3,29 +3,18 @@ import { BsFillSendArrowUpFill } from "react-icons/bs";
 import { useFormik } from "formik";
 import { useEffect, useRef, useState } from 'react';
 import {io} from "socket.io-client";
-import { userLoader } from './hooks/Datas';
-// import {Random} from "./mess-utils";
-// import * as Yup from "yup"
+// import { useParams } from 'react-router-dom';
 
-// interface inputType{
-//     inputMessage:string,
-//     inputFile: FileList | undefined;
-// }
 const socket = io("http://localhost:8080");
-
+// interface studentDataTypes {
+//     username:string;
+//     password:string;
+//     email:string;
+// }
 const MainChat = () => {
     // const [message, setMessage] = useState<inputType>();
     const [values,setValues] = useState<string >();
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await userLoader();
-            if (data) {
-                setValues(data.username); 
-            }
-        };
-
-        fetchData();
-    }, []);
+    // const [studentData,setStudentData] = useState<studentDataTypes>()
     
     
     const formik = useFormik({
@@ -61,6 +50,11 @@ const MainChat = () => {
         formik.setFieldValue("inputFile", null||"" );
     };
 
+    // const params = useParams();
+
+
+   
+
   return (
     <div
     className=' h-full flex'
@@ -71,7 +65,7 @@ const MainChat = () => {
         action="">
 
             <div className='w-full shadow-xl'>
-                <MainChatNav/>
+                <MainChatNav />
             </div>
 
             <div

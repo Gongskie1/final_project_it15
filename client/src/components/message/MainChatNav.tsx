@@ -1,13 +1,33 @@
-import { Axios } from 'axios';
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-// interface MainNavTypes{
-//   friendId:string;
-// }
+
+
 
 const MainChatNav = () => {
-  const params = useParams();
+  const [data,setData] = useState<string>()
+      const params = useParams();
+
+  useEffect(() => {
+    const id = params.id;
+
+    fetch(`http://localhost:8080/chat-page/friend/${id}`)
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+        .then((data) => {
+            setData(data.data.email)
+            console.log("Server Response Status:", data);
+        })
+        .catch((error) => {
+            console.log("Error fetching data:", error);
+        });
+
+        console.log("This is an ID: ", id);
+    }, [params]);
   
   return (
     <div
@@ -24,7 +44,7 @@ const MainChatNav = () => {
             <div>
                 <h2
                 className='text-base font-semibold uppercase'
-                >asdasd</h2>
+                >{data}</h2>
             </div>
         </div>
     </div>

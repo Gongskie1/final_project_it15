@@ -8,6 +8,7 @@ const student = require("./src/user/student/Student");
 const createStudent = require("./src/user/user_register/route");
 const bodyParser = require("body-parser");
 const studentLogin = require("./src/user/user_login/route");
+const studentMessage = require("./src/message/route")
 const cors = require("cors");
 
 // ================================================
@@ -15,7 +16,9 @@ app.use(cors({ origin: "http://localhost:5173" }));
 
 app.use(bodyParser.json());
 app.use(createStudent);
-app.use(studentLogin)
+app.use(studentLogin);
+app.use(studentMessage)
+
 const server = http.createServer(app);
 const io = new Server(server,{
   cors:{

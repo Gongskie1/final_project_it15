@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     loader: loader,
     children:[
       {
-        path: "friend/:friendID",
+        path: "friend/:id",
         element: <MainChat/>
       }
     ]
