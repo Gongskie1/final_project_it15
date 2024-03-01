@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 
 interface studentListType{
     about_me: string;
@@ -14,7 +15,7 @@ interface studentListType{
 
 const Sidebar = () => {
     const [studentList ,setStudentList] = useState<studentListType[]>([]);
-    const [values,setValues] = useState<string>();
+    // const [values,setValues] = useState<string>();
 
     useEffect(()=>{
         fetch("http://localhost:8080/student-list")
@@ -22,7 +23,7 @@ const Sidebar = () => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json(); // Convert response to JSON
+            return response.json();
         })
         .then(data => {
             setStudentList(data.message)
@@ -35,11 +36,11 @@ const Sidebar = () => {
     },[])
     
    
-    useEffect(() => {
-        if (values) {
-            window.alert(values);
-        }
-    }, [values]);
+    // useEffect(() => {
+    //     if (values) {
+    //         window.alert(values);
+    //     }
+    // }, [values]);
     
   return (
     <div className='px-4  h-full flex flex-col'>
@@ -54,13 +55,14 @@ const Sidebar = () => {
 
             <div className='pt-4 flex overflow-auto bg-[#F1F5F9] h-full flex-col rounded-lg gap-2'>
                 {studentList.map((value,index)=>(
-                    <div className='flex flex-row justify-center items-center self-baseline gap-2 cursor-pointer overflow-x-auto' key={index} 
-                        onClick={()=> {setValues(value.email);}}>
+                    <Link className='flex flex-row justify-center items-center self-baseline gap-2 cursor-pointer overflow-x-auto' key={index}
+                    // onClick={() => { setValues(value.email); } } 
+                    to={`friend/${index}`}>
                         <div
                         className='w-10 h-10 bg-[#E5E5E5] rounded-lg flex justify-center items-center cursor-pointer'
                         >s</div>
                         <p className='self-start '>{value.email}</p>
-                    </div>
+                    </Link>
                 ))}
                 
                 

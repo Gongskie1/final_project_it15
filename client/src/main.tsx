@@ -7,8 +7,10 @@ import {
 import './index.css'
 import { 
   LoginPage,
+  MainChat,
   Message } from './components';
 import Register from './components/loginpage/registerpage/Register';
+import { userLoader as loader } from './components/message/hooks/useLoader';
 
 
 const router = createBrowserRouter([
@@ -22,7 +24,14 @@ const router = createBrowserRouter([
   },
   {
     path:"/chat-page",
-    element: <Message/>
+    element: <Message/>,
+    loader: loader,
+    children:[
+      {
+        path: "friend/:friendID",
+        element: <MainChat/>
+      }
+    ]
   }
 ]);
 

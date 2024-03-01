@@ -1,6 +1,10 @@
 import React from 'react'
 
-const MainChatNav = () => {
+interface MainNavTypes{
+  name:string;
+}
+
+const MainChatNav = ({name}:MainNavTypes) => {
   return (
     <div
     className='shadow-xl px-5 py-2 border-t-[1px] border-x-[1px] rounded-t-lg'
@@ -16,7 +20,7 @@ const MainChatNav = () => {
             <div>
                 <h2
                 className='text-base font-semibold uppercase'
-                >receiver</h2>
+                >{name}</h2>
             </div>
         </div>
     </div>

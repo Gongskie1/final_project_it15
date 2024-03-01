@@ -3,6 +3,8 @@ import { BsFillSendArrowUpFill } from "react-icons/bs";
 import { useFormik } from "formik";
 import { useEffect, useRef, useState } from 'react';
 import {io} from "socket.io-client";
+import { userLoader } from './hooks/useLoader';
+// import {Random} from "./mess-utils";
 // import * as Yup from "yup"
 
 // interface inputType{
@@ -13,7 +15,17 @@ const socket = io("http://localhost:8080");
 
 const MainChat = () => {
     // const [message, setMessage] = useState<inputType>();
-    const [values,setValues] = useState<string>();
+    const [values,setValues] = useState<string | undefined>(undefined);
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await userLoader();
+            if (data) {
+                setValues(data.name); // Assuming 'name' is a property in your fetched data
+            }
+        };
+
+        fetchData();
+    }, []);
     
     
     const formik = useFormik({
@@ -33,14 +45,11 @@ const MainChat = () => {
 
     useEffect(()=>{
         socket.on("receive_message", (data)=>{
-            // setMessage(data.inputMessage)
             setValues(data.inputMessage)
-            // console.log(message)
         })
-    },[socket])
+    },[])
 
     
-
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         formik.setFieldValue('inputFile', e.target.files?.[0]);
     };
@@ -62,7 +71,7 @@ const MainChat = () => {
         action="">
 
             <div className='w-full shadow-xl'>
-                <MainChatNav/>
+                <MainChatNav name={`${values}`}/>
             </div>
 
             <div
